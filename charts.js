@@ -111,18 +111,20 @@ function buildCharts(sample) {
   for (i =0;i < topTenOtu_ids.length; i++){
   //console.log(text1.concat(topTenOtu_ids[i]))
      yticks[i] = text1.concat(topTenOtu_ids[i])
-     console.log(yticks[i])            
+    //  console.log(yticks[i])            
   }
 
-  //console.log(`yticks ${yticks}`)
+  console.log(`yticks ${yticks}`)
 
   // // 8. Create the trace for the bar chart. 
   var barData = [{
       x: topTenValues,
-      Y: topTenOtu_ids,
+      // Y: topTenOtu_ids,
+      y: yticks,
       text: topTenlabels,
       type: "bar",
-      orientation: 'h' 
+      orientation: 'h',
+      label: topTenOtu_ids
     }];
     // 9. Create the layout for the bar chart. 
   var barLayout = {
@@ -146,8 +148,20 @@ function buildCharts(sample) {
         marker: {
           color: otu_ids,
           size: sample_values,
-          sizeref: .05,
-          sizemode: 'area'
+          //sizeref: .05,
+          //sizemode: 'area',
+          colorscale: 'Jet'
+          // colorscale: [
+          //   ['0.0', 'rgb(165,0,38)'],
+          //   ['0.111111111111', 'rgb(215,48,39)'],
+          //   ['0.222222222222', 'rgb(244,109,67)'],
+          //   ['0.333333333333', 'rgb(253,174,97)'],
+          //   ['0.444444444444', 'rgb(254,224,144)'],
+          //   ['0.555555555556', 'rgb(224,243,248)'],
+          //   ['0.666666666667', 'rgb(171,217,233)'],
+          //   ['0.777777777778', 'rgb(116,173,209)'],
+          //   ['0.888888888889', 'rgb(69,117,180)'],
+          //   ['1.0', 'rgb(49,54,149)']]
         }
       }
     ];
@@ -170,7 +184,7 @@ function buildCharts(sample) {
   var gaugeData = [{
     domain: { x: [0, 1], y: [0, 1] },
 		value: washFreq,
-		title: { text: "Belly Button Washing Frequency <br> Scrubs per Week", font: { size: 20 }  },
+		title: { text: "<b> Belly Button Washing Frequency </b> <br> Scrubs per Week", font: { size: 20 }  },
 		type: "indicator",
 		mode: "gauge+number",
     gauge:{
